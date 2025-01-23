@@ -1,6 +1,7 @@
 const Prometheus = require('prom-client')
 const express = require('express');
 const http = require('http');
+const fs = require('fs')
 
 Prometheus.collectDefaultMetrics();
 
@@ -52,8 +53,10 @@ app.use(require('pino-http')({logger: pino}));
 
 app.get('/', (req, res) => {
   // Use req.log (a `pino` instance) to log JSON:
-  req.log.info({message: 'Hello from Node.js Starter Application!'});
-  res.send('Hello from Node.js Starter Application!');
+  // req.log.info({message: 'Hello from Node.js Starter Application!'});
+  // res.send('Hello from Node.js Starter Application!');
+  res.writeHead(200, { 'content-type': 'text/html' })
+  fs.createReadStream('src/index.html').pipe(res)
 });
 
 app.get('*', (req, res) => {
