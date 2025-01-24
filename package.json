@@ -1,17 +1,18 @@
 {
-  "name": "nodejs-starter",
-  "version": "3.0.0",
-  "description": "Simple Node.js application",
-  "license": "EPL-2.0",
-  "scripts": {
-    "start": "node server.js",
-    "debug": "node --inspect=${DEBUG_PORT} server.js",
-    "test": "node test/test.js"
-  },
+  "name": "react-complete-guide",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.18.1",
-    "pino": "^8.5.0",
-    "pino-http": "^8.2.0",
-    "prom-client": "^14.1.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

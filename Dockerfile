@@ -1,23 +1,18 @@
-# Install the app dependencies in a full Node docker image
-FROM registry.access.redhat.com/ubi8/nodejs-18:latest
+# Stage-1 & spacify a name 'builder'
+FROM  node:latest AS builder
 
-# Copy package.json, and optionally package-lock.json if it exists
-COPY package.json package-lock.json* ./
+# Create a directory  and go to directory 
+WORKDIR /app
 
-# Install app dependencies
-RUN \
-  if [ -f package-lock.json ]; then npm ci; \
-  else npm install; \
-  fi
+# Copy the package.json file to my current directory for install necessary dependence  
+COPY package.json .
 
-# Copy the dependencies into a Slim Node docker image
-FROM registry.access.redhat.com/ubi8/nodejs-18-minimal:latest
+# Install the dependence
+RUN npm install
 
-# Install app dependencies
-COPY --from=0 /opt/app-root/src/node_modules /opt/app-root/src/node_modules
-COPY . /opt/app-root/src
+# Copy other file to my current directory
+COPY . .
 
-ENV NODE_ENV production
-ENV PORT 3001
+ENV PORT 3000
 
 CMD ["npm", "start"]
